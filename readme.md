@@ -25,7 +25,7 @@ An Android View system for indicating Views using fading pulses
 Make the root of your `Activity`'s layout one of the base `PulseLayouts` included in this library: the `PulsingLinearLayout` or the `PulsingRelativeLayout`. e.g.
 
 ```xml
-<com.jackpocket.pulse.PulsingLinearLayout 
+<com.jackpocket.pulse.layouts.PulsingLinearLayout 
     ...
     >
 ``` 
