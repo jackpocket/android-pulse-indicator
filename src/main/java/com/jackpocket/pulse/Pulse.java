@@ -1,7 +1,6 @@
 package com.jackpocket.pulse;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -51,7 +50,6 @@ public class Pulse {
 
     protected Paint buildPaint(){
         Paint paint = new Paint();
-        paint.setColor(Color.WHITE);
         paint.setAntiAlias(true);
         paint.setDither(true);
         paint.setStyle(Paint.Style.STROKE);
@@ -149,6 +147,11 @@ public class Pulse {
 
     public Pulse setMaxScale(float maxScale) {
         this.maxScale = maxScale;
+        return this;
+    }
+
+    public Pulse setColor(int color){
+        paint.setColor(color);
         return this;
     }
 

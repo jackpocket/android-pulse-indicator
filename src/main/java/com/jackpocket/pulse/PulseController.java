@@ -38,6 +38,8 @@ public class PulseController {
     protected long lastAddedMs = 0;
     protected boolean circlePathOverride = true;
 
+    protected int pulsingColor;
+
     protected PulseTask pulseTask;
 
     public PulseController(ViewGroup parent){
@@ -62,6 +64,10 @@ public class PulseController {
         this.respawnRateMs = parent.getContext()
                 .getResources()
                 .getInteger(R.integer.pulse__respawn_rate_default);
+
+        this.pulsingColor = parent.getContext()
+                .getResources()
+                .getColor(R.color.pulse__color);
     }
 
     public PulseController attachTo(Activity activity, View pulseTarget){
@@ -169,6 +175,7 @@ public class PulseController {
 
     protected Pulse buildPulse(){
         return new Pulse(pulseStartBoundaries, circlePathOverride)
+                .setColor(pulsingColor)
                 .setAlphaInterpolator(alphaInterpolator)
                 .setScaleInterpolator(scaleInterpolator)
                 .setDuration(pulseLifeSpanMs)
@@ -224,6 +231,11 @@ public class PulseController {
 
     public PulseController setCirclePathOverride(boolean circlePathOverride) {
         this.circlePathOverride = circlePathOverride;
+        return this;
+    }
+
+    public PulseController setPulsingColor(int pulsingColor) {
+        this.pulsingColor = pulsingColor;
         return this;
     }
 

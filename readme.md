@@ -14,7 +14,7 @@ An Android View system for indicating Views using fading pulses
     }
 
     dependencies {
-        compile('com.jackpocket:pulse-indicator:1.0.0')
+        compile('com.jackpocket:pulse-indicator:1.0.1')
     }
 ```
 
@@ -22,7 +22,7 @@ An Android View system for indicating Views using fading pulses
 
 ##### Simple Approach
 
-Make the root of your `Activity`'s layout one of the base layouts included in this library: the `PulsingLinearLayout` or the `PulsingRelativeLayout`. e.g.
+Make the root of your `Activity`'s layout one of the base `PulseLayouts` included in this library: the `PulsingLinearLayout` or the `PulsingRelativeLayout`. e.g.
 
 ```xml
 <com.jackpocket.pulse.PulsingLinearLayout 
@@ -30,10 +30,10 @@ Make the root of your `Activity`'s layout one of the base layouts included in th
     >
 ``` 
 
-Then find it in your Activity and simply call `attachTo(Activity, View)`. Done. e.g.
+Then find it in your Activity and simply call `PulseLayout.attachTo(Activity, View)`. Done. e.g.
 
 ```java
-((PulsingLinearLayout) findViewById(R.id.my_pulsing_layout))
+((PulseLayout) findViewById(R.id.my_pulsing_layout))
     .attachTo(this, findViewById(R.id.some_view_I_want_to_indicate);
 ```
 
@@ -43,13 +43,14 @@ If you want to add pulsing to your own custom layouts, just checkout one of the 
 
 ### Configs
 
-The default configs for pulsing duration, individual lifespan, respawn rates can be overwritten via the following, respectively:
+The default configs for pulsing color, duration, individual lifespan, respawn rates can be overwritten via the following, respectively:
 
+    R.color.pulse__color
     R.integer.pulse__duration_default
     R.integer.pulse__lifespan_default
     R.integer.pulse__respawn_rate_default
 
-Note, all values are in milliseconds.
+Note, all time values are in milliseconds.
 
 
 
