@@ -14,13 +14,13 @@ An Android View system for indicating Views using fading pulses
     }
 
     dependencies {
-        compile('com.jackpocket:pulse-indicator:1.0.1')
+        compile('com.jackpocket:pulse-indicator:1.0.2')
     }
 ```
 
 # Usage
 
-##### Simple Approach
+##### Layout Approach
 
 Make the root of your `Activity`'s layout one of the base `PulseLayouts` included in this library: the `PulsingLinearLayout` or the `PulsingRelativeLayout`. e.g.
 
@@ -36,6 +36,19 @@ Then find it in your Activity and simply call `PulseLayout.attachTo(Activity, Vi
 ((PulseLayout) findViewById(R.id.my_pulsing_layout))
     .attachTo(this, findViewById(R.id.some_view_I_want_to_indicate);
 ```
+
+##### PulseView Approach
+
+Just add a `PulseView` to your layout (make sure you're using a ViewGroup that allows overlapping children (e.g. RelativeLayout)).
+
+```xml
+<RelativeLayout>
+    <com.jackpocket.pulse.layouts.PulseView
+        ... />
+</RelativeLayout>
+``` 
+
+You could then use it the same way you would going the Layout Approach mentioned above.
 
 ##### Custom Approach
 

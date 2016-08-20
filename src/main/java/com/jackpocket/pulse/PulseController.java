@@ -17,7 +17,7 @@ import java.util.List;
 
 public class PulseController {
 
-    protected ViewGroup parent;
+    protected View parent;
 
     protected View pulseTarget;
     protected Bitmap pulseTargetDrawingCache;
@@ -42,7 +42,10 @@ public class PulseController {
 
     protected PulseTask pulseTask;
 
-    public PulseController(ViewGroup parent){
+    /**
+     * @param parent the View triggering the controller's drawing (i.e. the PulseLayout)
+     */
+    public PulseController(View parent){
         this.parent = parent;
 
         this.circlePathOverride = parent.getContext()
@@ -70,6 +73,11 @@ public class PulseController {
                 .getColor(R.color.pulse__color);
     }
 
+    /**
+     * Attach to the target and begin the pulsing sequence
+     * @param activity
+     * @param pulseTarget the target to pulse behind
+     */
     public PulseController attachTo(Activity activity, View pulseTarget){
         this.pulseTarget = pulseTarget;
         this.pulseStartBoundaries = findViewInParent(activity, pulseTarget);
@@ -239,7 +247,7 @@ public class PulseController {
         return this;
     }
 
-    public ViewGroup getParent(){
+    public View getParent(){
         return parent;
     }
 
