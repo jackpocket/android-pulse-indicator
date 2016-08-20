@@ -1,0 +1,5 @@
+<resources>
+
+    <bool name="pulse__circle_path_default">true</bool>
+
+</resources>
