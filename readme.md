@@ -14,7 +14,7 @@ An Android View system for indicating Views using fading pulses
     }
 
     dependencies {
-        compile('com.jackpocket:pulse-indicator:1.0.3')
+        compile('com.jackpocket:pulse-indicator:1.0.4')
     }
 ```
 
@@ -63,6 +63,7 @@ Changing the values at runtime can also be configured by working with the PulseC
     .attachTo(this, findViewById(R.id.some_view_I_want_to_indicate)
         .setCirclePathOverride(false) // Set it to use the rectangular boundaries instead of circle pulsing
         .setPulsingColor(0xFF22FF22) // Set the pulse starting color
+        .setPulsingStrokeWidth(10) // Override the dynamic stroke width with a custom one
         .setDurationMs(1500) // Set the overall duration of the pulsing (will continue until no pulses exist)
         .setPulseLifespanMs(900) // The length of time a pulse is visible
         .setRespawnRateMs(300) // The rate at which a new pulse should be added

@@ -44,6 +44,9 @@ public class PulseController {
 
     protected int pulsingColor;
 
+    protected int pulsingStrokeWidth = -1;
+    protected int defaultPulsingStrokeWidth = 1;
+
     protected PulseTask pulseTask;
 
     protected PulseEventListener finishedListener;
@@ -88,6 +91,7 @@ public class PulseController {
         this.pulseTarget = pulseTarget;
         this.pulseStartBoundaries = findViewInParent(activity, pulseTarget);
         this.pulseTargetDrawingCache = getDrawingCache(pulseTarget);
+        this.defaultPulsingStrokeWidth = (int) Math.max(5, Math.abs((pulseStartBoundaries.right - pulseStartBoundaries.left)) * .065);
         this.startTimeMs = System.currentTimeMillis();
 
         cancelPulseTask();
@@ -196,6 +200,9 @@ public class PulseController {
     protected Pulse buildPulse(){
         return new Pulse(pulseStartBoundaries, circlePathOverride)
                 .setColor(pulsingColor)
+                .setStrokeWidth(pulsingStrokeWidth < 1
+                        ? defaultPulsingStrokeWidth
+                        : pulsingStrokeWidth)
                 .setAlphaInterpolator(alphaInterpolator)
                 .setScaleInterpolator(scaleInterpolator)
                 .setDuration(pulseLifeSpanMs)
@@ -275,6 +282,11 @@ public class PulseController {
 
     public PulseController setPulsingColor(int pulsingColor) {
         this.pulsingColor = pulsingColor;
+        return this;
+    }
+
+    public PulseController setPulsingStrokeWidth(int pulsingStrokeWidth){
+        this.pulsingStrokeWidth = pulsingStrokeWidth;
         return this;
     }
 

@@ -57,10 +57,6 @@ public class Pulse {
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setPathEffect(new CornerPathEffect(10));
 
-        int strokeWidth = (int) Math.max(5, Math.abs((startBoundaries.right - startBoundaries.left)) * .065);
-
-        paint.setStrokeWidth(strokeWidth);
-
         return paint;
     }
 
@@ -90,20 +86,10 @@ public class Pulse {
     public void draw(Canvas canvas){
         canvas.save();
 
-//        Log.d("Pulse", "Centers: " + startBoundaries.centerX() + ", " + startBoundaries.centerY());
-        Log.d("Pulse", "Centers: " + centers[0] + ", " + centers[1]);
-
         canvas.scale(scale,
                 scale,
                 centers[0],
                 centers[1]);
-
-//        if(circlePathOverride)
-//            canvas.drawCircle(startBoundaries.centerX(),
-//                    startBoundaries.centerY(),
-//                    radius,
-//                    paint);
-//        else canvas.drawRect(startBoundaries, paint);
 
         canvas.drawPath(path, paint);
 
@@ -152,6 +138,11 @@ public class Pulse {
 
     public Pulse setColor(int color){
         paint.setColor(color);
+        return this;
+    }
+
+    public Pulse setStrokeWidth(int strokeWidth){
+        paint.setStrokeWidth(strokeWidth);
         return this;
     }
 
