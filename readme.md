@@ -44,6 +44,8 @@ Just add a `PulseView` to your layout (make sure you're using a ViewGroup that a
 ```xml
 <RelativeLayout>
     <com.jackpocket.pulse.layouts.PulseView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         ... />
 </RelativeLayout>
 ``` 

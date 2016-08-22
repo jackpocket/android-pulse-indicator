@@ -255,4 +255,12 @@ public class PulseController {
         return durationMs;
     }
 
+    public PulseController stopPulsing(){
+        cancelPulseTask();
+
+        this.pulses = new ArrayList<Pulse>();
+
+        return this;
+    }
+
 }
