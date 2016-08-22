@@ -17,6 +17,10 @@ import java.util.List;
 
 public class PulseController {
 
+    public interface PulseEventListener {
+        public void onPulseEvent(View target);
+    }
+
     protected View parent;
 
     protected View pulseTarget;
@@ -41,6 +45,8 @@ public class PulseController {
     protected int pulsingColor;
 
     protected PulseTask pulseTask;
+
+    protected PulseEventListener finishedListener;
 
     /**
      * @param parent the View triggering the controller's drawing (i.e. the PulseLayout)
@@ -86,7 +92,13 @@ public class PulseController {
 
         cancelPulseTask();
 
-        pulseTask = new PulseTask(this);
+        pulseTask = new PulseTask(this)
+            .setFinishedListener(new Runnable() {
+                public void run() {
+                    finishPulsing();
+                }
+            });
+
         pulseTask.start();
 
         return this;
@@ -200,6 +212,25 @@ public class PulseController {
                 && respawnRateMs < System.currentTimeMillis() - lastAddedMs;
     }
 
+    protected void finishPulsing(){
+        cancelPulseTask();
+
+        pulseTargetDrawingCache = null;
+
+        if(finishedListener != null)
+            finishedListener.onPulseEvent(pulseTarget);
+
+        pulseTarget = null;
+    }
+
+    public PulseController stopPulsing(){
+        cancelPulseTask();
+
+        this.pulses = new ArrayList<Pulse>();
+
+        return this;
+    }
+
     protected void cancelPulseTask(){
         if(pulseTask != null)
             pulseTask.cancel();
@@ -247,20 +278,17 @@ public class PulseController {
         return this;
     }
 
+    public PulseController setFinishedListener(PulseEventListener finishedListener) {
+        this.finishedListener = finishedListener;
+        return this;
+    }
+
     public View getParent(){
         return parent;
     }
 
     public long getDurationMs(){
         return durationMs;
-    }
-
-    public PulseController stopPulsing(){
-        cancelPulseTask();
-
-        this.pulses = new ArrayList<Pulse>();
-
-        return this;
     }
 
 }

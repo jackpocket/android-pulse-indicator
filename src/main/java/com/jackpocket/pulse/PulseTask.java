@@ -7,8 +7,15 @@ public class PulseTask extends Thread {
     private PulseController controller;
     private boolean canceled = false;
 
+    private Runnable finishedListener;
+
     public PulseTask(PulseController controller){
         this.controller = controller;
+    }
+
+    public PulseTask setFinishedListener(Runnable finishedListener) {
+        this.finishedListener = finishedListener;
+        return this;
     }
 
     @Override
@@ -30,6 +37,9 @@ public class PulseTask extends Thread {
         controller.getParent()
                 .post(new Runnable(){
                     public void run(){
+                        if(!(canceled || finishedListener == null))
+                            finishedListener.run();
+
                         controller = null;
                     }
                 });

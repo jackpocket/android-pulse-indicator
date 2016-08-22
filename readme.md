@@ -14,7 +14,7 @@ An Android View system for indicating Views using fading pulses
     }
 
     dependencies {
-        compile('com.jackpocket:pulse-indicator:1.0.2')
+        compile('com.jackpocket:pulse-indicator:1.0.3')
     }
 ```
 
@@ -55,6 +55,21 @@ You could then use it the same way you would going the Layout Approach mentioned
 ##### Custom Approach
 
 If you want to add pulsing to your own custom layouts, just checkout one of the supplied layout class files for detailed information on how to implemented the `PulsingController` manually.
+
+Changing the values at runtime can also be configured by working with the PulseController:
+
+```java
+((PulseLayout) findViewById(R.id.my_pulsing_layout))
+    .attachTo(this, findViewById(R.id.some_view_I_want_to_indicate)
+        .setCirclePathOverride(false) // Set it to use the rectangular boundaries instead of circle pulsing
+        .setPulsingColor(0xFF22FF22) // Set the pulse starting color
+        .setDurationMs(1500) // Set the overall duration of the pulsing (will continue until no pulses exist)
+        .setPulseLifespanMs(900) // The length of time a pulse is visible
+        .setRespawnRateMs(300) // The rate at which a new pulse should be added
+        .setAlphaInterpolator(new AccelerateInterpolator()) // Set the Interpolator for the alpha animation
+        .setScaleInterpolator(new LinearInterpolator()) // Set the Interpolator for the scaling animation
+        .setFinishedListener(view -> doSomethingOnFinished()); // Set a callback to be triggered when the pulsing finished for a View. Calling attach() before it completes will prevent it from being triggered
+```
 
 ### Configs
 
