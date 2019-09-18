@@ -5,7 +5,6 @@ import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.animation.Interpolator;
 
 public class Pulse {

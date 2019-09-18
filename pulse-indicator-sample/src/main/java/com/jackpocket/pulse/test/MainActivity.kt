@@ -8,7 +8,6 @@ import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.jackpocket.pulse.layouts.PulsingLinearLayout
-import com.jackpocket.pulse.test.R
 
 class MainActivity: AppCompatActivity() {
 
