@@ -2,7 +2,7 @@
 
 [![Download](https://api.bintray.com/packages/jackpocket/maven/pulse-indicator/images/download.svg) ](https://bintray.com/jackpocket/maven/pulse-indicator/_latestVersion)
 
-An Android View system for indicating Views using fading pulses
+An Android system for indicating Views with fading pulses
 
 ![pulse-indicator Sample](https://github.com/jackpocket/android-pulse-indicator/raw/master/pulse.gif)
 
@@ -14,7 +14,7 @@ An Android View system for indicating Views using fading pulses
     }
 
     dependencies {
-        compile('com.jackpocket:pulse-indicator:1.0.4')
+        compile('com.jackpocket:pulse-indicator:1.1.0')
     }
 ```
 
@@ -60,16 +60,17 @@ Changing the values at runtime can also be configured by working with the PulseC
 
 ```java
 ((PulseLayout) findViewById(R.id.my_pulsing_layout))
-    .attachTo(this, findViewById(R.id.some_view_I_want_to_indicate)
+        .getPulseController()
         .setCirclePathOverride(false) // Set it to use the rectangular boundaries instead of circle pulsing
         .setPulsingColor(0xFF22FF22) // Set the pulse starting color
         .setPulsingStrokeWidth(10) // Override the dynamic stroke width with a custom one
         .setDurationMs(1500) // Set the overall duration of the pulsing (will continue until no pulses exist)
-        .setPulseLifespanMs(900) // The length of time a pulse is visible
+        .setPulseLifeSpanMs(900) // The length of time a pulse is visible
         .setRespawnRateMs(300) // The rate at which a new pulse should be added
         .setAlphaInterpolator(new AccelerateInterpolator()) // Set the Interpolator for the alpha animation
         .setScaleInterpolator(new LinearInterpolator()) // Set the Interpolator for the scaling animation
-        .setFinishedListener(view -> doSomethingOnFinished()); // Set a callback to be triggered when the pulsing finished for a View. Calling attach() before it completes will prevent it from being triggered
+        .setFinishedListener(view -> doSomethingOnFinished()) // Set a callback to be triggered when the pulsing finished for a View. Calling attach() before it completes will prevent it from being triggered
+        .attachTo(this, findViewById(R.id.some_view_I_want_to_indicate)); // Attach the configured controller to the target and start pulsing
 ```
 
 ### Configs

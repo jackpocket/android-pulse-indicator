@@ -1,7 +1,0 @@
-com.jackpcoket.pulse
-bool pulse__circle_path_default
-color pulse__color
-integer pulse__duration_default
-integer pulse__lifespan_default
-integer pulse__max_scale_percent_default
-integer pulse__respawn_rate_default

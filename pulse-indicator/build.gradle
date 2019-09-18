@@ -44,8 +44,8 @@ ext {
     libraryName = 'pulse-indicator'
     artifact = 'pulse-indicator'
 
-    libraryDescription = 'An Android View system for indicating Views using fading pulses'
-    libraryVersion = '1.0.4'
+    libraryDescription = 'An Android system for indicating Views with fading pulses'
+    libraryVersion = '1.1.0'
 
     developerId = 'jackpocket'
     developerName = 'Jackpocket'
