@@ -1,0 +1,139 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:2:1-22:12
+MERGED from [:pulse-indicator] /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/appcompat-1.1.0.aar/ce2ab97f0379ac87b76a7836fac40b67/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/constraintlayout-1.1.2.aar/48216760f29d14ab90533f7749ac66a3/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/fragment-1.1.0.aar/dfe82d5a64f7ac1832d7164ea65deb79/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/appcompat-resources-1.1.0.aar/896951f8da1c7cc2ded62d1429f9227c/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/462ad570ce6e774eed08a5568fb7e57e/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/9fb7080afad32619867151132e637043/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/549f97cb3cd0174abb68b36bb18c441a/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/activity-1.0.0.aar/f3eb0eb80f49c46588138861a8211a45/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.1.0.aar/7defdd42b7ddc5ceb450262e0136c3cb/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.1.0.aar/6e9727f8e4d6b84cbda7be0bb9359366/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/766dc4fa47bdb882401d44a326f383a9/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/254688cee0cd51bf03815d042e55bf78/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/471f41974b3126b7f35ef0028e9ebb6c/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.1.0.aar/7f312ee67de70338f206b57c50bf47e4/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.1.0.aar/71b52d0404b642294bcdc01991b4cde9/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.1.0.aar/b816866622965a937fe2a1d4a1738cb8/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/savedstate-1.0.0.aar/610772e9191c6f5d418f43f7cb6ee817/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/736efd1f28866870b154e0c6928c5779/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/d7f69fa817c0467c4d52ad38b0ca5e84/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/7ec0ce7b6eb363a6cbe2034841f0b75e/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/a37fead46ac27ecfda44a1037337318c/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:2:1-22:12
+	package
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:3:5-40
+		INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+		INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:2:1-22:12
+		INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:2:1-22:12
+		INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:4:5-63
+application
+ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:6:5-20:19
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/constraintlayout-1.1.2.aar/48216760f29d14ab90533f7749ac66a3/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/constraintlayout-1.1.2.aar/48216760f29d14ab90533f7749ac66a3/AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/254688cee0cd51bf03815d042e55bf78/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/254688cee0cd51bf03815d042e55bf78/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.1.0.aar/7f312ee67de70338f206b57c50bf47e4/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.1.0.aar/7f312ee67de70338f206b57c50bf47e4/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/254688cee0cd51bf03815d042e55bf78/AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:11:9-35
+	android:label
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:9:9-41
+	android:roundIcon
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:10:9-54
+	android:icon
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:8:9-43
+	android:allowBackup
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:7:9-35
+	android:theme
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:12:9-40
+activity#com.jackpocket.pulse.test.MainActivity
+ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:13:9-19:20
+	android:name
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:13:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:14:13-18:29
+action#android.intent.action.MAIN
+ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:15:17-68
+	android:name
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:15:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:17:17-76
+	android:name
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml:17:27-74
+uses-sdk
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+MERGED from [:pulse-indicator] /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:pulse-indicator] /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/appcompat-1.1.0.aar/ce2ab97f0379ac87b76a7836fac40b67/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/appcompat-1.1.0.aar/ce2ab97f0379ac87b76a7836fac40b67/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/constraintlayout-1.1.2.aar/48216760f29d14ab90533f7749ac66a3/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/constraintlayout-1.1.2.aar/48216760f29d14ab90533f7749ac66a3/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/fragment-1.1.0.aar/dfe82d5a64f7ac1832d7164ea65deb79/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/fragment-1.1.0.aar/dfe82d5a64f7ac1832d7164ea65deb79/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/appcompat-resources-1.1.0.aar/896951f8da1c7cc2ded62d1429f9227c/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/appcompat-resources-1.1.0.aar/896951f8da1c7cc2ded62d1429f9227c/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/462ad570ce6e774eed08a5568fb7e57e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/462ad570ce6e774eed08a5568fb7e57e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/9fb7080afad32619867151132e637043/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/9fb7080afad32619867151132e637043/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/549f97cb3cd0174abb68b36bb18c441a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/549f97cb3cd0174abb68b36bb18c441a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/activity-1.0.0.aar/f3eb0eb80f49c46588138861a8211a45/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/activity-1.0.0.aar/f3eb0eb80f49c46588138861a8211a45/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.1.0.aar/7defdd42b7ddc5ceb450262e0136c3cb/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.1.0.aar/7defdd42b7ddc5ceb450262e0136c3cb/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.1.0.aar/6e9727f8e4d6b84cbda7be0bb9359366/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.1.0.aar/6e9727f8e4d6b84cbda7be0bb9359366/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/766dc4fa47bdb882401d44a326f383a9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/766dc4fa47bdb882401d44a326f383a9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/254688cee0cd51bf03815d042e55bf78/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/254688cee0cd51bf03815d042e55bf78/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/471f41974b3126b7f35ef0028e9ebb6c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/471f41974b3126b7f35ef0028e9ebb6c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.1.0.aar/7f312ee67de70338f206b57c50bf47e4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.1.0.aar/7f312ee67de70338f206b57c50bf47e4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.1.0.aar/71b52d0404b642294bcdc01991b4cde9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.1.0.aar/71b52d0404b642294bcdc01991b4cde9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.1.0.aar/b816866622965a937fe2a1d4a1738cb8/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.1.0.aar/b816866622965a937fe2a1d4a1738cb8/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/savedstate-1.0.0.aar/610772e9191c6f5d418f43f7cb6ee817/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/savedstate-1.0.0.aar/610772e9191c6f5d418f43f7cb6ee817/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/736efd1f28866870b154e0c6928c5779/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/736efd1f28866870b154e0c6928c5779/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/d7f69fa817c0467c4d52ad38b0ca5e84/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/d7f69fa817c0467c4d52ad38b0ca5e84/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/7ec0ce7b6eb363a6cbe2034841f0b75e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/7ec0ce7b6eb363a6cbe2034841f0b75e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/a37fead46ac27ecfda44a1037337318c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/mattsilber/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/a37fead46ac27ecfda44a1037337318c/AndroidManifest.xml:20:5-44
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+		INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+		ADDED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml
+		INJECTED from /Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/src/main/AndroidManifest.xml

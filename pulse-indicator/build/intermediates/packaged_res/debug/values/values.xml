@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="pulse__circle_path_default">true</bool>
+    <color name="pulse__color">#FFFFFF</color>
+    <integer name="pulse__duration_default">1500</integer>
+    <integer name="pulse__lifespan_default">850</integer>
+    <integer name="pulse__max_scale_percent_default">300</integer>
+    <integer name="pulse__respawn_rate_default">300</integer>
+</resources>
