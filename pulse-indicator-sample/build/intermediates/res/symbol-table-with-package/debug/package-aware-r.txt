@@ -783,6 +783,8 @@ id line3
 id listMode
 id list_item
 id main__action_pulse
+id main__action_stop
+id main__action_suspend
 id main__pulse_layout
 id main__pulse_target_image
 id message

@@ -12,6 +12,7 @@ import android.view.animation.LinearInterpolator;
 
 import com.jackpcoket.pulse.R;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +22,13 @@ public class PulseController {
         public void onPulseEvent(View target);
     }
 
-    protected View parent;
+    protected WeakReference<View> parent;
 
-    protected View pulseTarget;
+    protected WeakReference<View> pulseTarget = new WeakReference<View>(null);
     protected Bitmap pulseTargetDrawingCache;
     protected Rect pulseStartBoundaries = new Rect();
 
-    protected List<Pulse> pulses = new ArrayList<Pulse>();
+    protected final ArrayList<Pulse> pulses = new ArrayList<Pulse>();
 
     protected Interpolator alphaInterpolator = new AccelerateInterpolator();
     protected Interpolator scaleInterpolator = new LinearInterpolator();
@@ -35,6 +36,7 @@ public class PulseController {
     protected long durationMs = 1500;
     protected long pulseLifeSpanMs = 900;
     protected long respawnRateMs = 300;
+    protected boolean respawnAllowed = true;
 
     protected float pulseMaxScale = 3;
 
@@ -52,10 +54,13 @@ public class PulseController {
     protected PulseEventListener finishedListener;
 
     /**
-     * @param parent the View triggering the controller's drawing (i.e. the PulseLayout)
+     * @param parent the non-null View triggering the controller's drawing (i.e. the PulseLayout)
      */
-    public PulseController(View parent){
-        this.parent = parent;
+    public PulseController(View parent) {
+        if (pulseTarget == null)
+            throw new RuntimeException("View supplied to PulseController() cannot be null!");
+
+        this.parent = new WeakReference<View>(parent);
 
         this.circlePathOverride = parent.getContext()
                 .getResources()
@@ -85,39 +90,43 @@ public class PulseController {
     /**
      * Attach to the target and begin the pulsing sequence
      * @param activity
-     * @param pulseTarget the target to pulse behind
+     * @param pulseTarget the non-null target to pulse behind
      */
-    public PulseController attachTo(Activity activity, View pulseTarget){
-        this.pulseTarget = pulseTarget;
+    public PulseController attachTo(Activity activity, View pulseTarget) {
+        if (pulseTarget == null)
+            throw new RuntimeException("View supplied to PulseController.attachTo(Activity,View) cannot be null!");
+
+        this.pulseTarget = new WeakReference<View>(pulseTarget);
         this.pulseStartBoundaries = findViewInParent(activity, pulseTarget);
         this.pulseTargetDrawingCache = getDrawingCache(pulseTarget);
         this.defaultPulsingStrokeWidth = (int) Math.max(5, Math.abs((pulseStartBoundaries.right - pulseStartBoundaries.left)) * .065);
         this.startTimeMs = System.currentTimeMillis();
+        this.respawnAllowed = true;
 
         cancelPulseTask();
 
-        pulseTask = new PulseTask(this)
+        this.pulseTask = new PulseTask(this)
             .setFinishedListener(new Runnable() {
                 public void run() {
                     finishPulsing();
                 }
             });
 
-        pulseTask.start();
+        this.pulseTask.start();
 
         return this;
     }
 
-    protected Rect findViewInParent(Activity activity, View view){
-        Rect viewRect = getWindowLocation(activity, pulseTarget);
+    protected Rect findViewInParent(Activity activity, View view) {
+        Rect viewRect = getWindowLocation(activity, view);
 
         stripParentPositions(activity, viewRect);
 
         return viewRect;
     }
 
-    protected void stripParentPositions(Activity activity, Rect rect){
-        Rect parentRect = getWindowLocation(activity, parent);
+    protected void stripParentPositions(Activity activity, Rect rect) {
+        Rect parentRect = getWindowLocation(activity, this.parent.get());
 
         rect.left = rect.left - parentRect.left;
         rect.top = rect.top - parentRect.top;
@@ -125,7 +134,7 @@ public class PulseController {
         rect.bottom = rect.bottom - parentRect.top;
     }
 
-    protected Rect getWindowLocation(Activity activity, View view){
+    protected Rect getWindowLocation(Activity activity, View view) {
         int[] windowLocation = new int[2];
 
         Rect statusBar = new Rect();
@@ -148,13 +157,15 @@ public class PulseController {
     }
 
     public void draw(Canvas canvas){
-        for(Pulse pulse : pulses)
+        for(Pulse pulse : pulses) {
             pulse.draw(canvas);
+        }
 
         if(pulseTargetDrawingCache == null)
             return;
 
-        canvas.drawBitmap(pulseTargetDrawingCache,
+        canvas.drawBitmap(
+                pulseTargetDrawingCache,
                 pulseStartBoundaries.left,
                 pulseStartBoundaries.top,
                 null);
@@ -166,141 +177,188 @@ public class PulseController {
 
         Bitmap bitmap = view.getDrawingCache();
 
-        if(bitmap != null)
+        if(bitmap != null) {
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight());
+        }
 
         view.setDrawingCacheEnabled(false);
 
         return bitmap;
     }
 
-    public void update(){
+    public void update() {
         if(!isRunning())
             return;
 
         addNewPulseIfPossible();
 
-        for(Pulse pulse : pulses)
-            pulse.update();
+        synchronized (this.pulses) {
+            for(Pulse pulse : pulses) {
+                pulse.update();
+            }
 
-        for(int i = pulses.size() - 1; 0 <= i; i--)
-            if(!pulses.get(i).isAlive())
+            for(int i = pulses.size() - 1; 0 <= i; i--) {
+                if (pulses.get(i).isAlive())
+                    continue;
+
                 pulses.remove(i);
+            }
+        }
 
-        parent.invalidate();
+        safelyInvalidateParent();
     }
 
-    protected void addNewPulseIfPossible(){
-        if(isPulseAddingAvailable()){
-            this.lastAddedMs = System.currentTimeMillis();
-            this.pulses.add(buildPulse());
+    protected void addNewPulseIfPossible() {
+        synchronized (this.pulses) {
+            if(isPulseAddingAvailable()){
+                this.lastAddedMs = System.currentTimeMillis();
+                this.pulses.add(buildPulse());
+            }
         }
     }
 
-    protected Pulse buildPulse(){
+    protected Pulse buildPulse() {
         return new Pulse(pulseStartBoundaries, circlePathOverride)
                 .setColor(pulsingColor)
-                .setStrokeWidth(pulsingStrokeWidth < 1
-                        ? defaultPulsingStrokeWidth
-                        : pulsingStrokeWidth)
+                .setStrokeWidth(pulsingStrokeWidth < 1 ? defaultPulsingStrokeWidth : pulsingStrokeWidth)
                 .setAlphaInterpolator(alphaInterpolator)
                 .setScaleInterpolator(scaleInterpolator)
                 .setDuration(pulseLifeSpanMs)
                 .setMaxScale(pulseMaxScale);
     }
 
-    public boolean isRunning(){
-        return System.currentTimeMillis() - startTimeMs < durationMs
-                || 0 < pulses.size();
+    protected void safelyInvalidateParent() {
+        View parent = this.parent.get();
+
+        if (parent == null)
+            return;
+
+        parent.invalidate();
     }
 
-    protected boolean isPulseAddingAvailable(){
-        return System.currentTimeMillis() - startTimeMs < durationMs
+    public boolean isRunning() {
+        synchronized (this.pulses) {
+            return System.currentTimeMillis() - startTimeMs < durationMs
+                    || 0 < pulses.size();
+        }
+    }
+
+    protected boolean isPulseAddingAvailable() {
+        return respawnAllowed
+                && System.currentTimeMillis() - startTimeMs < durationMs
                 && respawnRateMs < System.currentTimeMillis() - lastAddedMs;
     }
 
-    protected void finishPulsing(){
-        cancelPulseTask();
+    protected void finishPulsing() {
+        View pulseTarget = this.pulseTarget.get();
 
-        pulseTargetDrawingCache = null;
+        stopPulsing();
 
-        if(finishedListener != null)
+        if(finishedListener != null) {
             finishedListener.onPulseEvent(pulseTarget);
-
-        pulseTarget = null;
+        }
     }
 
-    public PulseController stopPulsing(){
+    /**
+     * Immediately stop all current and new Pulses from being created.
+     * Completion callbacks will not be triggered.
+     */
+    public PulseController stopPulsing() {
         cancelPulseTask();
 
-        this.pulses = new ArrayList<Pulse>();
+        synchronized (this.pulses) {
+            this.pulses.clear();
+        }
+
+        this.pulseTarget = new WeakReference<View>(null);
 
         return this;
     }
 
-    protected void cancelPulseTask(){
-        if(pulseTask != null)
-            pulseTask.cancel();
+    protected void cancelPulseTask() {
+        if (pulseTask == null)
+            return;
 
-        pulseTask = null;
+        this.pulseTask.cancel();
+        this.pulseTask = null;
+    }
+
+    /**
+     * Suspend the creation of new animated Pulses. This will continue
+     * currently-active Pulses until all have been completed, then
+     * finish normally.
+     */
+    public PulseController suspendPulseCreation() {
+        this.respawnAllowed = false;
+
+        return this;
     }
 
     public PulseController setAlphaInterpolator(Interpolator alphaInterpolator) {
         this.alphaInterpolator = alphaInterpolator;
+
         return this;
     }
 
     public PulseController setScaleInterpolator(Interpolator scaleInterpolator) {
         this.scaleInterpolator = scaleInterpolator;
+
         return this;
     }
 
     public PulseController setDurationMs(long durationMs) {
         this.durationMs = durationMs;
+
         return this;
     }
 
     public PulseController setPulseLifeSpanMs(long pulseLifeSpanMs) {
         this.pulseLifeSpanMs = pulseLifeSpanMs;
+
         return this;
     }
 
     public PulseController setRespawnRateMs(long respawnRateMs) {
         this.respawnRateMs = respawnRateMs;
+
         return this;
     }
 
     public PulseController setPulseMaxScale(float pulseMaxScale) {
         this.pulseMaxScale = pulseMaxScale;
+
         return this;
     }
 
     public PulseController setCirclePathOverride(boolean circlePathOverride) {
         this.circlePathOverride = circlePathOverride;
+
         return this;
     }
 
     public PulseController setPulsingColor(int pulsingColor) {
         this.pulsingColor = pulsingColor;
+
         return this;
     }
 
     public PulseController setPulsingStrokeWidth(int pulsingStrokeWidth){
         this.pulsingStrokeWidth = pulsingStrokeWidth;
+
         return this;
     }
 
     public PulseController setFinishedListener(PulseEventListener finishedListener) {
         this.finishedListener = finishedListener;
+
         return this;
     }
 
-    public View getParent(){
-        return parent;
+    public View getParent() {
+        return parent.get();
     }
 
-    public long getDurationMs(){
+    public long getDurationMs() {
         return durationMs;
     }
-
 }

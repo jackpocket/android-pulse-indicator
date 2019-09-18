@@ -1,4 +1,4 @@
-#Wed Sep 18 10:43:34 EDT 2019
+#Wed Sep 18 11:13:46 EDT 2019
 base.0=/Users/mattsilber/workspace-jackpocket/android-pulse-indicator/pulse-indicator-sample/build/intermediates/dex/debug/mergeDexDebug/out
 path.0=classes.dex
 renamed.0=classes.dex

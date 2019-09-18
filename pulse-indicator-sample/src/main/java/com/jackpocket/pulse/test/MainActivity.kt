@@ -42,6 +42,18 @@ class MainActivity: AppCompatActivity() {
                 .attachTo(this, pulseTarget)
     }
 
+    fun onStopPulseClicked(view: View?) {
+        Log.d(TAG, "Stopping pulse...")
+
+        pulseLayout.pulseController.stopPulsing()
+    }
+
+    fun onSuspendPulseClicked(view: View?) {
+        Log.d(TAG, "Stopping pulse...")
+
+        pulseLayout.pulseController.suspendPulseCreation()
+    }
+
     companion object {
 
         const val TAG = "PulseIndicatorTest"
