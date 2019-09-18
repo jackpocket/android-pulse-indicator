@@ -15,13 +15,14 @@ public class PulseTask extends Thread {
 
     public PulseTask setFinishedListener(Runnable finishedListener) {
         this.finishedListener = finishedListener;
+
         return this;
     }
 
     @Override
     public void run(){
-        try{
-            while(!canceled && controller.isRunning()){
+        try {
+            while(!canceled && controller.isRunning()) {
                 controller.getParent()
                     .post(new Runnable(){
                         public void run(){
@@ -32,11 +33,11 @@ public class PulseTask extends Thread {
                 Thread.sleep(SLEEP);
             }
         }
-        catch(Exception e){ e.printStackTrace(); }
+        catch(Exception e) { e.printStackTrace(); }
 
         controller.getParent()
-                .post(new Runnable(){
-                    public void run(){
+                .post(new Runnable() {
+                    public void run() {
                         if(!(canceled || finishedListener == null))
                             finishedListener.run();
 
@@ -48,5 +49,4 @@ public class PulseTask extends Thread {
     public void cancel(){
         this.canceled = true;
     }
-
 }

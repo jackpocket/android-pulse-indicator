@@ -33,12 +33,12 @@ public class Pulse {
         this(startBoundaries, true);
     }
 
-    public Pulse(Rect startBoundaries, boolean circlePathOverride){
+    public Pulse(Rect startBoundaries, boolean circlePathOverride) {
         this.startBoundaries = startBoundaries;
         this.circlePathOverride = circlePathOverride;
         this.paint = buildPaint();
 
-        this.centers = new int[]{
+        this.centers = new int[] {
                 startBoundaries.left + ((startBoundaries.right - startBoundaries.left) / 2),
                 Math.abs(startBoundaries.top + ((startBoundaries.bottom - startBoundaries.top) / 2))
         };
@@ -47,7 +47,7 @@ public class Pulse {
         this.createdAt = System.currentTimeMillis();
     }
 
-    protected Paint buildPaint(){
+    protected Paint buildPaint() {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setDither(true);
@@ -62,16 +62,15 @@ public class Pulse {
     protected Path buildPath(){
         Path path = new Path();
 
-        if(circlePathOverride){
-            radius = (int) (Math.min(startBoundaries.right - startBoundaries.left,
-                    Math.abs(startBoundaries.bottom - startBoundaries.top)) / 2);
+        if(circlePathOverride) {
+            int horizontal = startBoundaries.right - startBoundaries.left;
+            int vertical = Math.abs(startBoundaries.bottom - startBoundaries.top);
 
-            path.addCircle(centers[0],
-                    centers[1],
-                    radius,
-                    Path.Direction.CW);
+            this.radius = Math.min(horizontal, vertical) / 2;
+
+            path.addCircle(centers[0], centers[1], radius, Path.Direction.CW);
         }
-        else{
+        else {
             path.moveTo(startBoundaries.left, startBoundaries.top);
             path.lineTo(startBoundaries.right, startBoundaries.top);
             path.lineTo(startBoundaries.right, startBoundaries.bottom);
@@ -82,71 +81,74 @@ public class Pulse {
         return path;
     }
 
-    public void draw(Canvas canvas){
+    public void draw(Canvas canvas) {
         canvas.save();
-
-        canvas.scale(scale,
-                scale,
-                centers[0],
-                centers[1]);
-
+        canvas.scale(scale, scale, centers[0], centers[1]);
         canvas.drawPath(path, paint);
-
         canvas.restore();
     }
 
-    public void update(){
+    public void update() {
         float percentCompleted = (System.currentTimeMillis() - createdAt) / (float) duration;
 
-        if(alphaInterpolator != null)
+        if(alphaInterpolator != null) {
             this.paint.setAlpha((int) (MAX_ALPHA - (alphaInterpolator.getInterpolation(percentCompleted) * MAX_ALPHA)));
+        }
 
-        if(scaleInterpolator != null)
+        if(scaleInterpolator != null) {
             this.scale = 1 + ((maxScale - 1) * scaleInterpolator.getInterpolation(percentCompleted));
+        }
     }
 
     public Pulse setPaint(Paint paint) {
         this.paint = paint;
+
         return this;
     }
 
     public Pulse setAlphaInterpolator(Interpolator alphaInterpolator) {
         this.alphaInterpolator = alphaInterpolator;
+
         return this;
     }
 
     public Pulse setScaleInterpolator(Interpolator scaleInterpolator) {
         this.scaleInterpolator = scaleInterpolator;
+
         return this;
     }
 
     public Pulse setDuration(long duration) {
         this.duration = duration;
+
         return this;
     }
 
     public Pulse setCirclePathOverride(boolean circlePathOverride) {
         this.circlePathOverride = circlePathOverride;
+
         return this;
     }
 
     public Pulse setMaxScale(float maxScale) {
         this.maxScale = maxScale;
+
         return this;
     }
 
     public Pulse setColor(int color){
         paint.setColor(color);
+
         return this;
     }
 
     public Pulse setStrokeWidth(int strokeWidth){
         paint.setStrokeWidth(strokeWidth);
+
         return this;
     }
 
     public boolean isAlive(){
         return System.currentTimeMillis() - createdAt < duration;
     }
-
 }
