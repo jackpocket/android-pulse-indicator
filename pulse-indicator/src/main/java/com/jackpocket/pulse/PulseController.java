@@ -9,8 +9,6 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.jackpcoket.pulse.R;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
