@@ -10,5 +10,4 @@ public interface PulseLayout {
     public PulseController attachTo(Activity activity, View view);
 
     public PulseController getPulseController();
-
 }

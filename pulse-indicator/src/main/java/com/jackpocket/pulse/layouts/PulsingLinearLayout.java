@@ -17,17 +17,20 @@ public class PulsingLinearLayout extends LinearLayout implements PulseLayout {
 
     public PulsingLinearLayout(Context context) {
         super(context);
+
         setWillNotDraw(false);
     }
 
     public PulsingLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         setWillNotDraw(false);
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public PulsingLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
         setWillNotDraw(false);
     }
 

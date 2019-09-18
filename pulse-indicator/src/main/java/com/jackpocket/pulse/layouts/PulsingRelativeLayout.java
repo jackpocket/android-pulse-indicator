@@ -15,16 +15,19 @@ public class PulsingRelativeLayout extends RelativeLayout implements PulseLayout
 
     public PulsingRelativeLayout(Context context) {
         super(context);
+
         setWillNotDraw(false);
     }
 
     public PulsingRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         setWillNotDraw(false);
     }
 
     public PulsingRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
         setWillNotDraw(false);
     }
 
