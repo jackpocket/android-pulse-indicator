@@ -1,6 +1,6 @@
 # pulse-indicator
 
-[![Download](https://api.bintray.com/packages/jackpocket/maven/pulse-indicator/images/download.svg) ](https://bintray.com/jackpocket/maven/pulse-indicator/_latestVersion)
+[![Download](https://img.shields.io/maven-central/v/com.jackpocket/pulse-indicator)](https://search.maven.org/artifact/com.jackpocket/pulse-indicator)
 
 An Android system for indicating Views with fading pulses
 
@@ -10,11 +10,11 @@ An Android system for indicating Views with fading pulses
 
 ```
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        compile('com.jackpocket:pulse-indicator:1.1.0')
+        compile('com.jackpocket:pulse-indicator:1.1.1')
     }
 ```
 
@@ -84,5 +84,7 @@ The default configs for pulsing color, duration, individual lifespan, respawn ra
 
 Note, all time values are in milliseconds.
 
+### Moved to MavenCentral
 
+As of version 1.1.1, pulse-indicator will be hosted on MavenCentral. Versions 1.1.0 and below will remain on JCenter.
 
