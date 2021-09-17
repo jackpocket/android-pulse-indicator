@@ -11,6 +11,8 @@ import android.view.animation.LinearInterpolator;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class PulseController {
 
@@ -47,7 +49,9 @@ public class PulseController {
 
     protected PulseTask pulseTask;
 
-    protected PulseEventListener finishedListener;
+    protected WeakReference<PulseEventListener> finishedListener;
+
+    private final Object lock = new Object();
 
     /**
      * @param parent the non-null View triggering the controller's drawing (i.e. the PulseLayout)
@@ -84,13 +88,45 @@ public class PulseController {
     }
 
     /**
-     * Attach to the target and begin the pulsing sequence
+     * Post {@link PulseController#attachTo(Activity,View)} call on the UI Thread.
+     *
+     * @param activity
+     * @param pulseTarget the non-null target to pulse behind
+     */
+    public PulseController attachToOnUiThread(Activity activity, View pulseTarget) {
+        if (pulseTarget == null)
+            throw new RuntimeException("View supplied to PulseController.attachToOnUiThread cannot be null!");
+
+        final WeakReference<Activity> weakActivity = new WeakReference<Activity>(activity);
+        final WeakReference<View> weakTarget = new WeakReference<View>(pulseTarget);
+
+        Runnable attachmentRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Activity activity = weakActivity.get();
+                View target = weakTarget.get();
+
+                if (activity == null || target == null)
+                    return;
+
+                PulseController.this.attachTo(activity, target);
+            }
+        };
+
+        activity.runOnUiThread(attachmentRunnable);
+
+        return this;
+    }
+
+    /**
+     * Attach to the target and begin the pulsing sequence.
+     *
      * @param activity
      * @param pulseTarget the non-null target to pulse behind
      */
     public PulseController attachTo(Activity activity, View pulseTarget) {
         if (pulseTarget == null)
-            throw new RuntimeException("View supplied to PulseController.attachTo(Activity,View) cannot be null!");
+            throw new RuntimeException("View supplied to PulseController.attachTo cannot be null!");
 
         this.pulseTarget = new WeakReference<View>(pulseTarget);
         this.pulseStartBoundaries = findViewInParent(activity, pulseTarget);
@@ -152,12 +188,18 @@ public class PulseController {
         return rect;
     }
 
-    public void draw(Canvas canvas){
-        for(Pulse pulse : pulses) {
+    public void draw(Canvas canvas) {
+        List<Pulse> pulsesToDraw;
+
+        synchronized (lock) {
+            pulsesToDraw = new ArrayList<Pulse>(pulses);
+        }
+
+        for (Pulse pulse : pulsesToDraw) {
             pulse.draw(canvas);
         }
 
-        if(pulseTargetDrawingCache == null)
+        if (pulseTargetDrawingCache == null)
             return;
 
         canvas.drawBitmap(
@@ -173,7 +215,7 @@ public class PulseController {
 
         Bitmap bitmap = view.getDrawingCache();
 
-        if(bitmap != null) {
+        if (bitmap != null) {
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight());
         }
 
@@ -183,17 +225,17 @@ public class PulseController {
     }
 
     public void update() {
-        if(!isRunning())
+        if (!isRunning())
             return;
 
         addNewPulseIfPossible();
 
-        synchronized (this.pulses) {
-            for(Pulse pulse : pulses) {
+        synchronized (lock) {
+            for (Pulse pulse : pulses) {
                 pulse.update();
             }
 
-            for(int i = pulses.size() - 1; 0 <= i; i--) {
+            for (int i = pulses.size() - 1; 0 <= i; i--) {
                 if (pulses.get(i).isAlive())
                     continue;
 
@@ -205,8 +247,8 @@ public class PulseController {
     }
 
     protected void addNewPulseIfPossible() {
-        synchronized (this.pulses) {
-            if(isPulseAddingAvailable()){
+        synchronized (lock) {
+            if (isPulseAddingAvailable()) {
                 this.lastAddedMs = System.currentTimeMillis();
                 this.pulses.add(buildPulse());
             }
@@ -233,7 +275,7 @@ public class PulseController {
     }
 
     public boolean isRunning() {
-        synchronized (this.pulses) {
+        synchronized (lock) {
             return System.currentTimeMillis() - startTimeMs < durationMs
                     || 0 < pulses.size();
         }
@@ -250,23 +292,28 @@ public class PulseController {
 
         stopPulsing();
 
-        if(finishedListener != null) {
-            finishedListener.onPulseEvent(pulseTarget);
+        final PulseEventListener completionCallback = this.finishedListener.get();
+
+        if (completionCallback != null) {
+            completionCallback.onPulseEvent(pulseTarget);
         }
     }
 
     /**
      * Immediately stop all current and new Pulses from being created.
+     * <br><br>
      * Completion callbacks will not be triggered.
      */
     public PulseController stopPulsing() {
         cancelPulseTask();
 
-        synchronized (this.pulses) {
+        synchronized (lock) {
             this.pulses.clear();
         }
 
         this.pulseTarget = new WeakReference<View>(null);
+
+        safelyInvalidateParent();
 
         return this;
     }
@@ -302,16 +349,28 @@ public class PulseController {
         return this;
     }
 
+    public PulseController setDuration(long duration, TimeUnit unit) {
+        return setDurationMs(unit.toMillis(duration));
+    }
+
     public PulseController setDurationMs(long durationMs) {
         this.durationMs = durationMs;
 
         return this;
     }
 
+    public PulseController setPulseLifeSpan(long pulseLifeSpan, TimeUnit unit) {
+        return setPulseLifeSpanMs(unit.toMillis(pulseLifeSpan));
+    }
+
     public PulseController setPulseLifeSpanMs(long pulseLifeSpanMs) {
         this.pulseLifeSpanMs = pulseLifeSpanMs;
 
         return this;
+    }
+
+    public PulseController setRespawnRate(long respawnRateMs, TimeUnit unit) {
+        return setRespawnRateMs(unit.toMillis(respawnRateMs));
     }
 
     public PulseController setRespawnRateMs(long respawnRateMs) {
@@ -344,8 +403,16 @@ public class PulseController {
         return this;
     }
 
+    /**
+     * Set a callback to be triggered on (non-canceled or stopped) pulse completions.
+     * <br><br>
+     * This callback is weakly held.
+     *
+     * @param finishedListener the callback to be triggered
+     * @return this instance
+     */
     public PulseController setFinishedListener(PulseEventListener finishedListener) {
-        this.finishedListener = finishedListener;
+        this.finishedListener = new WeakReference<PulseEventListener>(finishedListener);
 
         return this;
     }

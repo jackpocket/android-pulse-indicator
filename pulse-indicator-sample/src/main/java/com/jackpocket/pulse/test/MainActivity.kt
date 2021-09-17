@@ -7,9 +7,10 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import com.jackpocket.pulse.PulseController
 import com.jackpocket.pulse.layouts.PulsingLinearLayout
 
-class MainActivity: AppCompatActivity() {
+class MainActivity: AppCompatActivity(), PulseController.PulseEventListener {
 
     private val pulseLayout: PulsingLinearLayout
         get() = findViewById(R.id.main__pulse_layout)
@@ -35,10 +36,12 @@ class MainActivity: AppCompatActivity() {
                 .setRespawnRateMs(300)
                 .setAlphaInterpolator(AccelerateInterpolator())
                 .setScaleInterpolator(LinearInterpolator())
-                .setFinishedListener({  _ ->
-                    Log.d(TAG, "Pulse completed.")
-                })
+                .setFinishedListener(this)
                 .attachTo(this, pulseTarget)
+    }
+
+    override fun onPulseEvent(target: View?) {
+        Log.d(TAG, "Pulse completed.")
     }
 
     fun onStopPulseClicked(view: View?) {

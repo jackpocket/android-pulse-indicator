@@ -1,5 +1,8 @@
 package com.jackpocket.pulse;
 
+import android.os.Handler;
+import android.os.Looper;
+
 public class PulseTask extends Thread {
 
     private static final int SLEEP = 15;
@@ -7,9 +10,10 @@ public class PulseTask extends Thread {
     private PulseController controller;
     private boolean canceled = false;
 
+    private final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
     private Runnable finishedListener;
 
-    public PulseTask(PulseController controller){
+    public PulseTask(PulseController controller) {
         this.controller = controller;
     }
 
@@ -20,33 +24,37 @@ public class PulseTask extends Thread {
     }
 
     @Override
-    public void run(){
+    public void run() {
         try {
-            while(!canceled && controller.isRunning()) {
-                controller.getParent()
-                    .post(new Runnable(){
-                        public void run(){
-                            controller.update();
-                        }
-                    });
+            final Runnable updateRunnable = new Runnable() {
+                @Override
+                public void run(){
+                    controller.update();
+                }
+            };
+
+            while (!canceled && controller.isRunning()) {
+                mainThreadHandler.post(updateRunnable);
 
                 Thread.sleep(SLEEP);
             }
         }
-        catch(Exception e) { e.printStackTrace(); }
+        catch (Exception e) { e.printStackTrace(); }
 
-        controller.getParent()
-                .post(new Runnable() {
-                    public void run() {
-                        if(!(canceled || finishedListener == null))
-                            finishedListener.run();
+        mainThreadHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (!(canceled || finishedListener == null)) {
+                    finishedListener.run();
+                }
 
-                        controller = null;
-                    }
-                });
+                controller = null;
+                finishedListener = null;
+            }
+        });
     }
 
-    public void cancel(){
+    public void cancel() {
         this.canceled = true;
     }
 }

@@ -1,6 +1,6 @@
 # pulse-indicator
 
-[![Download](https://api.bintray.com/packages/jackpocket/maven/pulse-indicator/images/download.svg) ](https://bintray.com/jackpocket/maven/pulse-indicator/_latestVersion)
+[![Download](https://img.shields.io/maven-central/v/com.jackpocket/pulse-indicator)](https://search.maven.org/artifact/com.jackpocket/pulse-indicator)
 
 An Android system for indicating Views with fading pulses
 
@@ -10,11 +10,11 @@ An Android system for indicating Views with fading pulses
 
 ```
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        compile('com.jackpocket:pulse-indicator:1.1.0')
+        compile('com.jackpocket:pulse-indicator:2.0.0')
     }
 ```
 
@@ -69,8 +69,14 @@ Changing the values at runtime can also be configured by working with the PulseC
         .setRespawnRateMs(300) // The rate at which a new pulse should be added
         .setAlphaInterpolator(new AccelerateInterpolator()) // Set the Interpolator for the alpha animation
         .setScaleInterpolator(new LinearInterpolator()) // Set the Interpolator for the scaling animation
-        .setFinishedListener(view -> doSomethingOnFinished()) // Set a callback to be triggered when the pulsing finished for a View. Calling attach() before it completes will prevent it from being triggered
-        .attachTo(this, findViewById(R.id.some_view_I_want_to_indicate)); // Attach the configured controller to the target and start pulsing
+        
+        // Set a callback to be triggered when the pulsing finished for a View. 
+        // Calling attach() or stopPulsing() before it completes will prevent it from being triggered.
+        // The supplied PulseEventListener is weakly held by the PulseController.
+        .setFinishedListener(this) 
+        
+        // Attach the configured controller to the target and start pulsing
+        .attachTo(this, findViewById(R.id.some_view_I_want_to_indicate)); 
 ```
 
 ### Configs
@@ -84,5 +90,7 @@ The default configs for pulsing color, duration, individual lifespan, respawn ra
 
 Note, all time values are in milliseconds.
 
+### Moved to MavenCentral
 
+As of version 2.0.0, pulse-indicator will be hosted on MavenCentral. Versions 1.1.0 and below will remain on JCenter.
 
