@@ -301,7 +301,7 @@ public class PulseController {
 
     /**
      * Immediately stop all current and new Pulses from being created.
-     * <br /><br />
+     * <br><br>
      * Completion callbacks will not be triggered.
      */
     public PulseController stopPulsing() {
@@ -405,7 +405,7 @@ public class PulseController {
 
     /**
      * Set a callback to be triggered on (non-canceled or stopped) pulse completions.
-     * <br /><br />
+     * <br><br>
      * This callback is weakly held.
      *
      * @param finishedListener the callback to be triggered
