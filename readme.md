@@ -69,8 +69,14 @@ Changing the values at runtime can also be configured by working with the PulseC
         .setRespawnRateMs(300) // The rate at which a new pulse should be added
         .setAlphaInterpolator(new AccelerateInterpolator()) // Set the Interpolator for the alpha animation
         .setScaleInterpolator(new LinearInterpolator()) // Set the Interpolator for the scaling animation
-        .setFinishedListener(view -> doSomethingOnFinished()) // Set a callback to be triggered when the pulsing finished for a View. Calling attach() before it completes will prevent it from being triggered
-        .attachTo(this, findViewById(R.id.some_view_I_want_to_indicate)); // Attach the configured controller to the target and start pulsing
+        
+        // Set a callback to be triggered when the pulsing finished for a View. 
+        // Calling attach() or stopPulsing() before it completes will prevent it from being triggered.
+        // The supplied PulseEventListener is weakly held by the PulseController.
+        .setFinishedListener(this) 
+        
+        // Attach the configured controller to the target and start pulsing
+        .attachTo(this, findViewById(R.id.some_view_I_want_to_indicate)); 
 ```
 
 ### Configs
