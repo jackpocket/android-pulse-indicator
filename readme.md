@@ -14,7 +14,7 @@ An Android system for indicating Views with fading pulses
     }
 
     dependencies {
-        compile('com.jackpocket:pulse-indicator:1.1.1')
+        compile('com.jackpocket:pulse-indicator:2.0.0')
     }
 ```
 
@@ -92,5 +92,5 @@ Note, all time values are in milliseconds.
 
 ### Moved to MavenCentral
 
-As of version 1.1.1, pulse-indicator will be hosted on MavenCentral. Versions 1.1.0 and below will remain on JCenter.
+As of version 2.0.0, pulse-indicator will be hosted on MavenCentral. Versions 1.1.0 and below will remain on JCenter.
 
