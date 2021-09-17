@@ -88,13 +88,45 @@ public class PulseController {
     }
 
     /**
-     * Attach to the target and begin the pulsing sequence
+     * Post {@link PulseController#attachTo(Activity,View)} call on the UI Thread.
+     *
+     * @param activity
+     * @param pulseTarget the non-null target to pulse behind
+     */
+    public PulseController attachToOnUiThread(Activity activity, View pulseTarget) {
+        if (pulseTarget == null)
+            throw new RuntimeException("View supplied to PulseController.attachToOnUiThread cannot be null!");
+
+        final WeakReference<Activity> weakActivity = new WeakReference<Activity>(activity);
+        final WeakReference<View> weakTarget = new WeakReference<View>(pulseTarget);
+
+        Runnable attachmentRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Activity activity = weakActivity.get();
+                View target = weakTarget.get();
+
+                if (activity == null || target == null)
+                    return;
+
+                PulseController.this.attachTo(activity, target);
+            }
+        };
+
+        activity.runOnUiThread(attachmentRunnable);
+
+        return this;
+    }
+
+    /**
+     * Attach to the target and begin the pulsing sequence.
+     *
      * @param activity
      * @param pulseTarget the non-null target to pulse behind
      */
     public PulseController attachTo(Activity activity, View pulseTarget) {
         if (pulseTarget == null)
-            throw new RuntimeException("View supplied to PulseController.attachTo(Activity,View) cannot be null!");
+            throw new RuntimeException("View supplied to PulseController.attachTo cannot be null!");
 
         this.pulseTarget = new WeakReference<View>(pulseTarget);
         this.pulseStartBoundaries = findViewInParent(activity, pulseTarget);
@@ -269,6 +301,7 @@ public class PulseController {
 
     /**
      * Immediately stop all current and new Pulses from being created.
+     * <br /><br />
      * Completion callbacks will not be triggered.
      */
     public PulseController stopPulsing() {
@@ -370,6 +403,14 @@ public class PulseController {
         return this;
     }
 
+    /**
+     * Set a callback to be triggered on (non-canceled or stopped) pulse completions.
+     * <br /><br />
+     * This callback is weakly held.
+     *
+     * @param finishedListener the callback to be triggered
+     * @return this instance
+     */
     public PulseController setFinishedListener(PulseEventListener finishedListener) {
         this.finishedListener = new WeakReference<PulseEventListener>(finishedListener);
 
